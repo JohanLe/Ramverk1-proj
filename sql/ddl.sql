@@ -50,22 +50,64 @@ CREATE TABLE Tag(
     "text" TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS Activity;
+DROP TABLE IF EXISTS Tag_Activity;
 
-CREATE TABLE Activity(
+CREATE TABLE Tag_Activity(
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "tag_id" INT NOT NULL,
+    "question_id" INT NOT NULL
+);
+
+
+
+
+
+DROP TABLE IF EXISTS User_Activity;
+
+CREATE TABLE User_Activity(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "user_id" INT NOT NULL,
     "type_id" INT NOT NULL,
     "type" VARCHAR(50) NOT NULL
 );
 
-insert into tag (id, text) VALUES (12345, "Marvels");
-insert into tag (id, text) VALUES (225, "Batman");
+insert into tag (text) VALUES ("Marvels");
+insert into tag (text) VALUES ("Batman");
+insert into tag (text) VALUES ("Thor");
+insert into tag (text) VALUES ("Joker");
+insert into tag (text) VALUES ("Steve Rogers");
 
+
+
+
+
+insert into tag_activity (tag_id, question_id) VALUES (1, 223);
+insert into tag_activity (tag_id, question_id) VALUES (1, 1232);
+insert into tag_activity (tag_id, question_id) VALUES (1, 1232);
+
+insert into tag_activity (tag_id, question_id) VALUES (2, 1232);
+insert into tag_activity (tag_id, question_id) VALUES (2, 1232);
+insert into tag_activity (tag_id, question_id) VALUES (2, 11);
+insert into tag_activity (tag_id, question_id) VALUES (2, 223);
+insert into tag_activity (tag_id, question_id) VALUES (2, 1232);
+insert into tag_activity (tag_id, question_id) VALUES (2, 223);
+
+insert into tag_activity (tag_id, question_id) VALUES (3, 421);
+insert into tag_activity (tag_id, question_id) VALUES (3, 1232);
+
+insert into tag_activity (tag_id, question_id) VALUES (4, 1212332);
+
+insert into tag_activity (tag_id, question_id) VALUES (5, 12123232);
+           
 insert into user (id, username, email, password, gravatar) VALUES (1234, "strix", "aa@gmail.com", "superHash", "none");
 insert into user (id, username, email, password, gravatar) VALUES (223, "Lenon", "bb@gmail.com", "superHash", "none");
 insert into user (id, username, email, password, gravatar) VALUES (523, "Thor321", "acc@gmail.com", "superHash", "none");
+insert into user (id, username, email, password, gravatar) VALUES (5223, "Steve", "steve@gmail.com", "superHash", "none");
 
-insert into question (id, user_id, title, text, date, likes) VALUES (3325, "strix", "Who is best?", "Superman or batman?", 2020-10-11, -5);
-insert into question (id, user_id, title, text, date, likes) VALUES (12, "Lenon", "Who is best?", "Harley Quin or Joker?", 2020-09-10, 5);
-insert into question (id, user_id, title, text, date, likes) VALUES (6668, "Thor321", "Who is best?", "Thor or Hulk?", 2020-12-10, 5);
+insert into question (id, user_id, title, text, date, likes) VALUES (3325, "strix", "Who is best?", "Superman or batman?", "2020-10-11", -5);
+insert into question (id, user_id, title, text, date, likes) VALUES (12, "Lenon", "Who is best?", "Harley Quin or Joker?", "2020-09-10", 5);
+insert into question (id, user_id, title, text, date, likes) VALUES (6668, "Thor321", "Captain america strong?", "Is he?", "2020-11-10", 5);
+insert into question (id, user_id, title, text, date, likes) VALUES (33, "Steven", "Who is batman?", "Mr rogers?", "2021-11-10", 5);
+insert into question (id, user_id, title, text, date, likes) VALUES (662268, "Thor321", "Where does hulk live?", "India", "2020-01-02", 5);
+insert into question (id, user_id, title, text, date, likes) VALUES (6612368, "Thor321", "How old is captain america?", "I belive he is 97", "2020-01-03", 5);
+insert into question (id, user_id, title, text, date, likes) VALUES (6555668, "Thor321", "Why is marvel movies so good?", "Thor or Hulk?", "2020-02-01", 5);

@@ -8,12 +8,13 @@ namespace Anax\View;
     <h3>What is going on?</h3>
     <div>
         <h5> Latest Questions</h5>
-        <p> TODO - sort by date <p>
+
         <?php foreach ($questions as $question) : ?>
             
             <a href="<?= url("question/update/{$question->id}"); ?>"><?= $question->id ?></a>
             <?= $question->title ?>
             Asked by: <?= $question->user_id ?>
+            <?= $question->date ?>
             
             </br>
         <?php endforeach; ?>
@@ -22,10 +23,8 @@ namespace Anax\View;
 
     <div>
         <h5> Treding tags</h5>
-        <p> TODO -  count em</p>
         <?php foreach ($tags as $tag) : ?>
-            
-            <a href="<?= url("tag/update/{$tag->id}"); ?>"><?= $tag->text ?></a>
+             <a href="<?= url("tag/update/{$tag->id}"); ?>"><?= $tag->text ?></a> 
             </br>
         <?php endforeach; ?>
     </div>

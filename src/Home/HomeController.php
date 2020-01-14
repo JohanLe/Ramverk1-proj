@@ -17,18 +17,21 @@ class HomeController implements ContainerInjectableInterface
         $question = new \Anax\Question\Question();
         $question->setDb($this->di->get("dbqb"));
 
-        $tag = new \Anax\Tag\Tag();
-        $tag->setDb($this->di->get("dbqb"));
+        $tagActivity = new \Anax\TagActivity\TagActivity();
+        $tagActivity->setDb($this->di->get("dbqb"));
 
         $user = new \Anax\User\User();
         $user->setDb($this->di->get("dbqb"));
 
         $page->add("home/index", [
-            "questions" => $question->findAll(),
-            "tags" => $tag->findAll(),
+            "questions" => $question->orderByWithLimit("date desc", 4),
+            "tags" => $tagActivity->mostFrequentTag(3),
             "users" => $user->findAll()
         ]);
 
+        
+
+            
         return $page->render();
     }
 
