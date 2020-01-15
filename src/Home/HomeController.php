@@ -26,7 +26,7 @@ class HomeController implements ContainerInjectableInterface
         $page->add("home/index", [
             "questions" => $question->orderByWithLimit("date desc", 4),
             "tags" => $tagActivity->mostFrequentTag(3),
-            "users" => $user->findAll()
+            "users" => $user->mostActiveUsers(3)
         ]);
 
         
