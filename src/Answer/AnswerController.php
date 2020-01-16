@@ -1,13 +1,13 @@
 <?php
 
-namespace Anax\Question;
+namespace Anax\Answer;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Anax\Question\HTMLForm\CreateForm;
-use Anax\Question\HTMLForm\EditForm;
-use Anax\Question\HTMLForm\DeleteForm;
-use Anax\Question\HTMLForm\UpdateForm;
+use Anax\Answer\HTMLForm\CreateForm;
+use Anax\Answer\HTMLForm\EditForm;
+use Anax\Answer\HTMLForm\DeleteForm;
+use Anax\Answer\HTMLForm\UpdateForm;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -16,7 +16,7 @@ use Anax\Question\HTMLForm\UpdateForm;
 /**
  * A sample controller to show how a controller class can be implemented.
  */
-class QuestionController implements ContainerInjectableInterface
+class AnswerController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
@@ -51,57 +51,17 @@ class QuestionController implements ContainerInjectableInterface
     public function indexActionGet() : object
     {
         $page = $this->di->get("page");
-        $question = new Question();
-        $question->setDb($this->di->get("dbqb"));
-
-        $page->add("question/crud/view-all", [
-            "items" => $question->findAll(),
-        ]);
-
-        return $page->render([
-            "title" => "A collection of items",
-        ]);
-    }
-
-    public function viewActionGet($question_id) : object
-    {
-        $page = $this->di->get("page");
-        $question = new Question();
-        $answer = new \Anax\Answer\Answer();
-       // $comment = new \Anax\Comment\Comment();
-    
-        $question->setDb($this->di->get("dbqb"));
+        $answer = new Answer();
         $answer->setDb($this->di->get("dbqb"));
 
-        /*  
-         - 1 Hämta alla answers till question
-            Hämta alla  comments kopplade till question.
-
-            har Comment ett answer_id kopplat? Lägg under answer id.
-            Inte? Lägg under question direkt.
-
-            
-
-
-        */
-        $quest = $question->findWhere("id = ?", [$question_id]);
-        $answers = $answer->findAllWhere("question_id = ?", $question_id);
-        $comments = $question->getConnectingData();
-
-        $article = $this->sortComments($quest, $answers, $comments);
-
-
-        $page->add("question/crud/view-single", [
-            "question" => $article[0],
-            "answers" => $article[1],
-
+        $page->add("answer/crud/view-all", [
+            "items" => $answer->findAll(),
         ]);
 
         return $page->render([
             "title" => "A collection of items",
         ]);
     }
-
 
 
 
@@ -116,7 +76,7 @@ class QuestionController implements ContainerInjectableInterface
         $form = new CreateForm($this->di);
         $form->check();
 
-        $page->add("question/crud/create", [
+        $page->add("answer/crud/create", [
             "form" => $form->getHTML(),
         ]);
 
@@ -138,7 +98,7 @@ class QuestionController implements ContainerInjectableInterface
         $form = new DeleteForm($this->di);
         $form->check();
 
-        $page->add("question/crud/delete", [
+        $page->add("answer/crud/delete", [
             "form" => $form->getHTML(),
         ]);
 
@@ -162,7 +122,7 @@ class QuestionController implements ContainerInjectableInterface
         $form = new UpdateForm($this->di, $id);
         $form->check();
 
-        $page->add("question/crud/update", [
+        $page->add("answer/crud/update", [
             "form" => $form->getHTML(),
         ]);
 
@@ -170,25 +130,4 @@ class QuestionController implements ContainerInjectableInterface
             "title" => "Update an item",
         ]);
     }
-
-
-    public function sortComments($question, $answers, $comments) {
-        $question->{"comments"} = [];
-        foreach($comments as $comment){
-            if($comment->answer_id != 0){
-                foreach($answers as $answer){
-                    if(!property_exists($answer, "comments")){
-                        $answer->{"comments"} = [];
-                    }
-                    if($answer->id == $comment->answer_id){
-                        $answer->comments[] = $comment;
-                    }
-                }
-            }else {
-                $question->comments[] = $comment;
-            }
-        }
-        return [$question, $answers];
-    }
-
 }

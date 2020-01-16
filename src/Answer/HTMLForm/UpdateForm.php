@@ -1,10 +1,10 @@
 <?php
 
-namespace Anax\User\HTMLForm;
+namespace Anax\Answer\HTMLForm;
 
 use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
-use Anax\User\User;
+use Anax\Answer\Answer;
 
 /**
  * Form to update an item.
@@ -20,43 +20,30 @@ class UpdateForm extends FormModel
     public function __construct(ContainerInterface $di, $id)
     {
         parent::__construct($di);
-        $user = $this->getItemDetails($id);
+        $answer = $this->getItemDetails($id);
         $this->form->create(
             [
                 "id" => __CLASS__,
-                "legend" => "Update User",
+                "legend" => "Update details of the item",
             ],
             [
                 "id" => [
                     "type" => "text",
                     "validation" => ["not_empty"],
                     "readonly" => true,
-                    "value" => $user->id,
+                    "value" => $answer->id,
                 ],
 
-                "username" => [
+                "column1" => [
                     "type" => "text",
                     "validation" => ["not_empty"],
-                    "readonly" => true,
-                    "value" => $user->username,
-                ],
-                "email" => [
-                    "type" => "text",
-                    "validation" => ["not_empty"],
-                    "value" => $user->email,
+                    "value" => $answer->column1,
                 ],
 
-                "gravatar" => [
+                "column2" => [
                     "type" => "text",
-                    "value" => $user->gravatar,
-                ],
-                "password" => [
-                    "type" => "password",
                     "validation" => ["not_empty"],
-                    "value" => $user->password,
-                ],
-                "passwordAgain" => [
-                    "type" => "password",
+                    "value" => $answer->column2,
                 ],
 
                 "submit" => [
@@ -79,14 +66,14 @@ class UpdateForm extends FormModel
      *
      * @param integer $id get details on item with id.
      * 
-     * @return User
+     * @return Answer
      */
     public function getItemDetails($id) : object
     {
-        $user = new User();
-        $user->setDb($this->di->get("dbqb"));
-        $user->find("id", $id);
-        return $user;
+        $answer = new Answer();
+        $answer->setDb($this->di->get("dbqb"));
+        $answer->find("id", $id);
+        return $answer;
     }
 
 
@@ -99,27 +86,12 @@ class UpdateForm extends FormModel
      */
     public function callbackSubmit() : bool
     {
-        $user = new User();
-        $user->setDb($this->di->get("dbqb"));
-        $user->find("id", $this->form->value("id"));
-        $user->username = $this->form->value("username");
-        $user->email = $this->form->value("email");
-        $user->gravatar = $this->form->value("gravatar");
-        $user->password = $this->form->value("password");
-        $passwordAgain = $this->form->value("passwordAgain");
-
-        if($passwordAgain === ""){
-            $passwordAgain = $user->password;
-        }
-        else if ($password !== $passwordAgain ) {
-            $this->form->rememberValues();
-            $this->form->addOutput("Password did not match.");
-            return false;
-        }
-
-
-        $this->form->addOutput("User was updated.");
-        $user->save();
+        $answer = new Answer();
+        $answer->setDb($this->di->get("dbqb"));
+        $answer->find("id", $this->form->value("id"));
+        $answer->column1 = $this->form->value("column1");
+        $answer->column2 = $this->form->value("column2");
+        $answer->save();
         return true;
     }
 
@@ -132,8 +104,8 @@ class UpdateForm extends FormModel
     //  */
     // public function callbackSuccess()
     // {
-    //     $this->di->get("response")->redirect("user")->send();
-    //     //$this->di->get("response")->redirect("user/update/{$user->id}");
+    //     $this->di->get("response")->redirect("answer")->send();
+    //     //$this->di->get("response")->redirect("answer/update/{$answer->id}");
     // }
 
 

@@ -37,6 +37,7 @@ CREATE TABLE Comment(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
     "user_id" INT NOT NULL,
     "question_id" INT NOT NULL,
+    "answer_id" INT,
     "date" DATE NOT NULL,
     "likes" INT,
     "text" TEXT NOT NULL
@@ -155,6 +156,12 @@ insert into Question (user_id, title, text, date, likes) VALUES (3,"How old is c
 insert into Question (user_id, title, text, date, likes) VALUES (4,  "Why is marvel movies so good?", "Thor or Hulk?", "2020-02-01", 5);
 insert into Question (user_id, title, text, date, likes) VALUES (4,  "How old is Bruce Wayne?", "I belive he is 38.What do u think?", "2020-02-01", 5);
 
-INSERT INTO Answer (id,question_id,user_id,date,text) VALUES(1,3,223,'2020-01-15','Captain america is very storong');
+INSERT INTO Answer (question_id,user_id,date,text) VALUES(1,1,'2020-01-15','Captain america is very storong');
+INSERT INTO Answer (question_id,user_id,date,text) VALUES(2,2,'2020-01-15','Captain america is very storong');
+INSERT INTO Answer (question_id,user_id,date,text) VALUES(1,3,'2020-01-15','Hulk is better');
+INSERT INTO Answer (question_id,user_id,date,text) VALUES(1,4,'2020-01-15','Iron man way better then CA');
 
-INSERT INTO Comment (id,question_id,user_id,date,text) VALUES(1,3,223,'2020-01-15','very interesting answer sir');
+INSERT INTO Comment (user_id, question_id, answer_id,date,text) VALUES(3,1,0,'2020-01-15','AWEFUL COMMENT sir');
+INSERT INTO Comment (user_id, question_id, answer_id,date,text) VALUES(3,1,0,'2020-01-17','very interesting COMMENT sir');
+INSERT INTO Comment (user_id, question_id, answer_id,date,text) VALUES(3,1,1,'2020-01-1','COMMENT sir');
+INSERT INTO Comment (user_id, question_id, answer_id,date,text) VALUES(3,1,1,'2020-01-21','COMMENT TO an ANSWER');

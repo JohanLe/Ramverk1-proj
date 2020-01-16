@@ -8,6 +8,7 @@ use Anax\User\HTMLForm\CreateForm;
 use Anax\User\HTMLForm\EditForm;
 use Anax\User\HTMLForm\DeleteForm;
 use Anax\User\HTMLForm\UpdateForm;
+use Anax\User\HTMLForm\LoginForm;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -128,6 +129,29 @@ class UserController implements ContainerInjectableInterface
 
         return $page->render([
             "title" => "Update an item",
+        ]);
+    }
+        /**
+     * Description.
+     *
+     * @param datatype $variable Description
+     *
+     * @throws Exception
+     *
+     * @return object as a response object
+     */
+    public function loginAction() : object
+    {
+        $page = $this->di->get("page");
+        $form = new LoginForm($this->di);
+        $form->check();
+
+        $page->add("anax/v2/article/default", [
+            "content" => $form->getHTML(),
+        ]);
+
+        return $page->render([
+            "title" => "A login page",
         ]);
     }
 }

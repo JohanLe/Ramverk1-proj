@@ -13,12 +13,17 @@ namespace Anax\View;
 $items = isset($items) ? $items : null;
 
 // Create urls for navigation
-$urlToCreate = url("question/create");
-$urlToDelete = url("question/delete");
+$urlToCreate = url("answer/create");
+$urlToDelete = url("answer/delete");
 
 
 
 ?><h1>View all items</h1>
+
+<p>
+    <a href="<?= $urlToCreate ?>">Create</a> | 
+    <a href="<?= $urlToDelete ?>">Delete</a>
+</p>
 
 <?php if (!$items) : ?>
     <p>There are no items to show.</p>
@@ -27,13 +32,19 @@ $urlToDelete = url("question/delete");
 endif;
 ?>
 
-
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Column1</th>
+        <th>Column2</th>
+    </tr>
     <?php foreach ($items as $item) : ?>
-
-        <a href="<?= url("question/view/{$item->id}"); ?>"><?= $item->title ?></a>
-
-        <p> Written by:<?= $item->user_id ?>  </p>
-        <p>Date: <?= $item->date ?>  </p>
-        ___________________________________ </br>
+    <tr>
+        <td>
+            <a href="<?= url("answer/update/{$item->id}"); ?>"><?= $item->id ?></a>
+        </td>
+        <td><?= $item->column1 ?></td>
+        <td><?= $item->column2 ?></td>
+    </tr>
     <?php endforeach; ?>
 </table>

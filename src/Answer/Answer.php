@@ -1,18 +1,18 @@
 <?php
 
-namespace Anax\User;
+namespace Anax\Answer;
 
 use Anax\DatabaseActiveRecord\ActiveRecordModel;
 
 /**
  * A database driven model using the Active Record design pattern.
  */
-class User extends ActiveRecordModel
+class Answer extends ActiveRecordModel
 {
     /**
      * @var string $tableName name of the database table.
      */
-    protected $tableName = "User";
+    protected $tableName = "Answer";
 
 
 
@@ -22,9 +22,9 @@ class User extends ActiveRecordModel
      * @var integer $id primary key auto incremented.
      */
     public $id;
-    public $username;
-    public $email;
-    public $password;
-    public $gravatar;
-
+    public $question_id;
+    public $user_id;
+    public $date;
+    public $likes;
+    public $text;
 }

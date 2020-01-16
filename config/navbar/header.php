@@ -15,12 +15,22 @@ return [
             "title" => "Första sidan, börja här.",
         ],
         [
-            "text" => "Forum - Super hjältar",
-            "url" => "forum",
-            "title" => "Super heroes.",
+            "text" => "Questions",
+            "url" => "question",
+            "title" => "All questions",
         ],
         [
-            "text" => "Om",
+            "text" => "Users",
+            "url" => "user",
+            "title" => "All users.",
+        ],
+        [
+            "text" => "Tags",
+            "url" => "tag",
+            "title" => "All tags.",
+        ],
+        [
+            "text" => "Om fixa",
             "url" => "om",
             "title" => "Om denna webbplats.",
         ],
