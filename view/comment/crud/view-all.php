@@ -11,11 +11,19 @@ namespace Anax\View;
 
 // Gather incoming variables and use default values if not set
 $items = isset($items) ? $items : null;
-$userHelper = new \Anax\User\UserHelper();
 
-?>
-<h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
-<h1>Users</h1>
+// Create urls for navigation
+$urlToCreate = url("comment/create");
+$urlToDelete = url("comment/delete");
+
+
+
+?><h1>View all items</h1>
+
+<p>
+    <a href="<?= $urlToCreate ?>">Create</a> | 
+    <a href="<?= $urlToDelete ?>">Delete</a>
+</p>
 
 <?php if (!$items) : ?>
     <p>There are no items to show.</p>
@@ -27,18 +35,16 @@ endif;
 <table>
     <tr>
         <th>Id</th>
-        <th>Email</th>
-        <th>Username</th>
-        <th>Gravatar</th>
+        <th>Column1</th>
+        <th>Column2</th>
     </tr>
     <?php foreach ($items as $item) : ?>
     <tr>
         <td>
-            <a href="<?= url("user/view/{$item->id}"); ?>"><?= $item->id ?></a>
+            <a href="<?= url("comment/update/{$item->id}"); ?>"><?= $item->id ?></a>
         </td>
-        <td><?= $item->email ?></td>
-        <td><?= $item->username ?></td>
-        <td><?= $item->gravatar ?? "None"?></td>
+        <td><?= $item->column1 ?></td>
+        <td><?= $item->column2 ?></td>
     </tr>
     <?php endforeach; ?>
 </table>

@@ -6,6 +6,7 @@ use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
 use Anax\Answer\Answer;
 
+
 /**
  * Form to create an item.
  */
@@ -16,7 +17,7 @@ class CreateForm extends FormModel
      *
      * @param Psr\Container\ContainerInterface $di a service container
      */
-    public function __construct(ContainerInterface $di)
+    public function __construct(ContainerInterface $di, $qid)
     {
         parent::__construct($di);
         $this->form->create(
@@ -25,13 +26,15 @@ class CreateForm extends FormModel
                 "legend" => "Details of the item",
             ],
             [
-                "column1" => [
-                    "type" => "text",
+                "question-id" => [
+                    "type" => "number",
                     "validation" => ["not_empty"],
+                    "readonly" => true,
+                    "value" => $qid
                 ],
                         
-                "column2" => [
-                    "type" => "text",
+                "Answer" => [
+                    "type" => "textarea",
                     "validation" => ["not_empty"],
                 ],
 
@@ -54,10 +57,21 @@ class CreateForm extends FormModel
      */
     public function callbackSubmit() : bool
     {
+        $userHelper = new \Anax\User\UserHelper();
+
+        if(!$userHelper->isLoggedIn()){
+            return false;
+        }
+
+        $user = $userHelper->getUser();
         $answer = new Answer();
         $answer->setDb($this->di->get("dbqb"));
-        $answer->column1  = $this->form->value("column1");
-        $answer->column2 = $this->form->value("column2");
+
+
+        $answer->question_id = $this->form->value("question-id");
+        $answer->user_id = $_SESSION['user_id'];
+        $answer->date = date("Y-m-d H:i");
+        $answer->text = $this->form->value("Answer");
         $answer->save();
         return true;
     }
@@ -71,7 +85,7 @@ class CreateForm extends FormModel
      */
     public function callbackSuccess()
     {
-        $this->di->get("response")->redirect("answer")->send();
+        $this->di->get("response")->redirect("question/")->send();
     }
 
 

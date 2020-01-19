@@ -117,44 +117,33 @@ BEGIN
 
 END;
 
-insert into Tag (text) VALUES ("Marvels");
-insert into Tag (text) VALUES ("Batman");
-insert into Tag (text) VALUES ("Thor");
-insert into Tag (text) VALUES ("Joker");
-insert into Tag (text) VALUES ("Steve Rogers");
 
-
-insert into Tag_Activity (tag_id, question_id) VALUES (1, 223);
-insert into Tag_Activity (tag_id, question_id) VALUES (1, 1232);
-insert into Tag_Activity (tag_id, question_id) VALUES (1, 1232);
-
-insert into Tag_Activity (tag_id, question_id) VALUES (2, 1232);
-insert into Tag_Activity (tag_id, question_id) VALUES (2, 1232);
-insert into Tag_Activity (tag_id, question_id) VALUES (2, 11);
-insert into Tag_Activity (tag_id, question_id) VALUES (2, 223);
-insert into Tag_Activity (tag_id, question_id) VALUES (2, 1232);
-insert into Tag_Activity (tag_id, question_id) VALUES (2, 223);
-
-insert into Tag_Activity (tag_id, question_id) VALUES (3, 421);
-insert into Tag_Activity (tag_id, question_id) VALUES (3, 1232);
-
-insert into Tag_Activity (tag_id, question_id) VALUES (4, 1212332);
-
-insert into Tag_Activity (tag_id, question_id) VALUES (5, 12123232);
-           
 insert into User (username, email, password, gravatar) VALUES ("strix", "aa@gmail.com", "superHash", "none");
 insert into User (username, email, password, gravatar) VALUES ("Lenon", "bb@gmail.com", "superHash", "none");
 insert into User (username, email, password, gravatar) VALUES ("Thor321", "acc@gmail.com", "superHash", "none");
 insert into User (username, email, password, gravatar) VALUES ("Steve", "steve@gmail.com", "superHash", "none");
 
+
+insert into Tag (text) VALUES ("Marvels");
+insert into Tag (text) VALUES ("Superman");
+
+
 insert into Question (user_id, title, text, date, likes) VALUES (1, "Who is best?", "Superman or batman?", "2020-10-11", -5);
-insert into Question (user_id, title, text, date, likes) VALUES (2, "Who is best?", "Harley Quin or Joker?", "2020-09-10", 5);
+insert into Question (user_id, title, text, date, likes) VALUES (2, "Who is best 2?", "Harley Quin or Joker?", "2020-09-10", 5);
 insert into Question (user_id, title, text, date, likes) VALUES (2, "Captain america strong?", "Is he?", "2020-11-10", 5);
 insert into Question (user_id, title, text, date, likes) VALUES (2,  "Who is batman?", "Mr rogers?", "2021-11-10", 5);
 insert into Question (user_id, title, text, date, likes) VALUES (2, "Where does hulk live?", "India", "2020-01-02", 5);
 insert into Question (user_id, title, text, date, likes) VALUES (3,"How old is captain america?", "I belive he is 97", "2020-01-03", 5);
 insert into Question (user_id, title, text, date, likes) VALUES (4,  "Why is marvel movies so good?", "Thor or Hulk?", "2020-02-01", 5);
 insert into Question (user_id, title, text, date, likes) VALUES (4,  "How old is Bruce Wayne?", "I belive he is 38.What do u think?", "2020-02-01", 5);
+
+
+insert into Tag_Activity (tag_id, question_id) VALUES (1, 1);
+insert into Tag_Activity (tag_id, question_id) VALUES (2, 1);
+insert into Tag_Activity (tag_id, question_id) VALUES (2, 2);
+insert into Tag_Activity (tag_id, question_id) VALUES (2, 3);
+
+
 
 INSERT INTO Answer (question_id,user_id,date,text) VALUES(1,1,'2020-01-15','Captain america is very storong');
 INSERT INTO Answer (question_id,user_id,date,text) VALUES(2,2,'2020-01-15','Captain america is very storong');

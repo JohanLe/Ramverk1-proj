@@ -9,20 +9,12 @@ namespace Anax\View;
 //var_dump(get_defined_functions());
 //echo showEnvironment(get_defined_vars());
 
-// Gather incoming variables and use default values if not set
-$item = isset($item) ? $item : null;
-
 // Create urls for navigation
-$urlToView = url("question");
+$urlToView = url("comment");
 
 
 
-$userHelper = new \Anax\User\UserHelper();
-
-?>
-<h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
-
-<h1>Update an item</h1>
+?><h1>Delete an item</h1>
 
 <?= $form ?>
 

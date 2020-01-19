@@ -68,25 +68,25 @@ class QuestionController implements ContainerInjectableInterface
         $page = $this->di->get("page");
         $question = new Question();
         $answer = new \Anax\Answer\Answer();
-       // $comment = new \Anax\Comment\Comment();
+        // $comment = new \Anax\Comment\Comment();
     
         $question->setDb($this->di->get("dbqb"));
         $answer->setDb($this->di->get("dbqb"));
 
-        /*  
+        /*
          - 1 Hämta alla answers till question
             Hämta alla  comments kopplade till question.
 
             har Comment ett answer_id kopplat? Lägg under answer id.
             Inte? Lägg under question direkt.
 
-            
+
 
 
         */
         $quest = $question->findWhere("id = ?", [$question_id]);
         $answers = $answer->findAllWhere("question_id = ?", $question_id);
-        $comments = $question->getConnectingData();
+        $comments = $question->getConnectingComments("Question.id = $question_id");
 
         $article = $this->sortComments($quest, $answers, $comments);
 
@@ -172,23 +172,23 @@ class QuestionController implements ContainerInjectableInterface
     }
 
 
-    public function sortComments($question, $answers, $comments) {
+    public function sortComments($question, $answers, $comments)
+    {
         $question->{"comments"} = [];
-        foreach($comments as $comment){
-            if($comment->answer_id != 0){
-                foreach($answers as $answer){
-                    if(!property_exists($answer, "comments")){
+        foreach ($comments as $comment) {
+            if ($comment->answer_id != 0) {
+                foreach ($answers as $answer) {
+                    if (!property_exists($answer, "comments")) {
                         $answer->{"comments"} = [];
                     }
-                    if($answer->id == $comment->answer_id){
+                    if ($answer->id == $comment->answer_id) {
                         $answer->comments[] = $comment;
                     }
                 }
-            }else {
+            } else {
                 $question->comments[] = $comment;
             }
         }
         return [$question, $answers];
     }
-
 }

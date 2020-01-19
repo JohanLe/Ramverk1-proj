@@ -65,6 +65,47 @@ class UserController implements ContainerInjectableInterface
     }
 
 
+        /**
+     * Show a single user
+     *
+     * @return object as a response object
+     */
+    public function viewActionGet($user_id) : object
+    {
+        $page = $this->di->get("page");
+        $user = new User();
+        $user->setDb($this->di->get("dbqb"));
+
+        $question = new \Anax\Question\Question();
+        $question->setDb($this->di->get("dbqb"));
+
+        $answer = new \Anax\Answer\Answer();
+        $answer->setDb($this->di->get("dbqb"));
+
+        $userDetails = $user->findWhere("id = ?", $user_id);
+        $questions = $question->findAllWhere("user_id = ?", $user_id);
+        $answers = $answer->findAllWhere("user_id = ?", $user_id);
+
+        $page->add("user/crud/view-user-activity", [
+            "user"=> $userDetails,
+            "questions" => $questions,
+            "answers" => $answers,
+        ]);
+
+        return $page->render([
+            "title" => "User: " . $userDetails->username,
+        ]);
+    }
+
+
+    public function logoutAction()
+    {
+
+        $userHelper = new \Anax\User\UserHelper();
+
+        $userHelper->logout();
+        header("Location: ../");
+    }
 
     /**
      * Handler with form to create a new item.
@@ -154,4 +195,5 @@ class UserController implements ContainerInjectableInterface
             "title" => "A login page",
         ]);
     }
+
 }

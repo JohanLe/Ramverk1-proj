@@ -1,13 +1,13 @@
 <?php
 
-namespace Anax\Answer;
+namespace Anax\Comment;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
-use Anax\Answer\HTMLForm\CreateForm;
-use Anax\Answer\HTMLForm\EditForm;
-use Anax\Answer\HTMLForm\DeleteForm;
-use Anax\Answer\HTMLForm\UpdateForm;
+use Anax\Comment\HTMLForm\CreateForm;
+use Anax\Comment\HTMLForm\EditForm;
+use Anax\Comment\HTMLForm\DeleteForm;
+use Anax\Comment\HTMLForm\UpdateForm;
 
 // use Anax\Route\Exception\ForbiddenException;
 // use Anax\Route\Exception\NotFoundException;
@@ -16,7 +16,7 @@ use Anax\Answer\HTMLForm\UpdateForm;
 /**
  * A sample controller to show how a controller class can be implemented.
  */
-class AnswerController implements ContainerInjectableInterface
+class CommentController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
@@ -51,11 +51,11 @@ class AnswerController implements ContainerInjectableInterface
     public function indexActionGet() : object
     {
         $page = $this->di->get("page");
-        $answer = new Answer();
-        $answer->setDb($this->di->get("dbqb"));
+        $comment = new Comment();
+        $comment->setDb($this->di->get("dbqb"));
 
-        $page->add("answer/crud/view-all", [
-            "items" => $answer->findAll(),
+        $page->add("comment/crud/view-all", [
+            "items" => $comment->findAll(),
         ]);
 
         return $page->render([
@@ -72,26 +72,33 @@ class AnswerController implements ContainerInjectableInterface
      */
     public function createAction() : object
     {
-        $page = $this->di->get("page");
-
-        $questionData = null;
-        $question = new \Anax\Question\Question();
-        $question->setDb($this->di->get("dbqb"));
+        $qid = 0;
+        $aid = 0;
 
         if(isset($_GET['qid']) ){
             $qid = $_GET['qid'];
-            $questionData = $question->findWhere("id = ?", $qid);
+          //  $questionData = $question->findWhere("id = ?", $qid);
             $form = new CreateForm($this->di, $qid);
+            if(isset($_GET['aid']) ){
+                $aid = $_GET['aid'];
+          //      $answerData = $answer->findWhere("id = ?", $aid);
+                $form = new CreateForm($this->di, $qid, $qid);
+            }
         }
         else{
             $form = new CreateForm($this->di, null);
         }
 
-       
+
+
+        $page = $this->di->get("page");
+        $form = new CreateForm($this->di,$qid,$aid);
         $form->check();
-        $page->add("answer/crud/create", [
+
+        $page->add("comment/crud/create", [
             "form" => $form->getHTML(),
-            "question" => $questionData
+           // "question" => $questionData,
+           // "answer" => $answerData
         ]);
 
         return $page->render([
@@ -112,7 +119,7 @@ class AnswerController implements ContainerInjectableInterface
         $form = new DeleteForm($this->di);
         $form->check();
 
-        $page->add("answer/crud/delete", [
+        $page->add("comment/crud/delete", [
             "form" => $form->getHTML(),
         ]);
 
@@ -136,7 +143,7 @@ class AnswerController implements ContainerInjectableInterface
         $form = new UpdateForm($this->di, $id);
         $form->check();
 
-        $page->add("answer/crud/update", [
+        $page->add("comment/crud/update", [
             "form" => $form->getHTML(),
         ]);
 

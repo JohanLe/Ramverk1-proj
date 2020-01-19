@@ -54,22 +54,6 @@ class LoginForm extends FormModel
      * 
      */
 
-    public function userLoggedIn($email, $username){
-        $_SESSION['user_email'] = $email;
-        $_SESSION['username'] = $username;
-    }
-
-        /**
-     * TODO: - Move to own class? same with login.
-     *        Also check function - if user is allowed on page?
-     * Remove user from session, mark user as logged out.
-     * 
-     */
-
-    public function userLoggOut(){
-        $_SESSION['user_email'] = null;
-        $_SESSION['username'] = null;
-    }
 
     /**
      * Callback for submit-button which should return true if it could
@@ -86,7 +70,7 @@ class LoginForm extends FormModel
     // Try to login
     $db = $this->di->get("dbqb");
     $db->connect();
-    $user = $db->select("password, username")
+    $user = $db->select("id, password, username")
                ->from("User")
                ->where("email = ?")
                ->execute([$email])
@@ -100,8 +84,9 @@ class LoginForm extends FormModel
        // return false;
     }
 
+    $userHelper = new \Anax\User\UserHelper();
     $this->form->addOutput("User logged in.");
-    $this->userLoggedIn($email,$user->username); // change to id/email
+    $userHelper->login($user->id, $user->username, $email);
     
     return true;
     }

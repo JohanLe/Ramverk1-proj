@@ -6,7 +6,6 @@ return [
     // Use for styling the menu
     "wrapper" => null,
     "class" => "my-navbar rm-default rm-desktop",
- 
     // Here comes the menu items
     "items" => [
         [
@@ -30,9 +29,34 @@ return [
             "title" => "All tags.",
         ],
         [
+            "text" => "User",
+            "url" => "user",
+            "title" => "User.",
+            "submenu" => [
+                "items" => [
+                    [
+                        "text" => "Login",
+                        "url" => "user/login",
+                        "title" => "login",
+                    ],
+                    [
+                        "text" => "Register",
+                        "url" => "user/Create",
+                        "title" => "Register",
+                    ],
+                    [
+                        "text" => "Logout",
+                        "url" => "user/logout",
+                        "title" => "Logout",
+                    ],
+                ],
+            ],
+        ],
+        [
             "text" => "Om fixa",
             "url" => "om",
             "title" => "Om denna webbplats.",
         ],
+        
     ],
 ];

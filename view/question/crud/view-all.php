@@ -12,13 +12,11 @@ namespace Anax\View;
 // Gather incoming variables and use default values if not set
 $items = isset($items) ? $items : null;
 
-// Create urls for navigation
-$urlToCreate = url("question/create");
-$urlToDelete = url("question/delete");
+$userHelper = new \Anax\User\UserHelper();
 
-
-
-?><h1>View all items</h1>
+?>
+<h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
+<h1>View all items</h1>
 
 <?php if (!$items) : ?>
     <p>There are no items to show.</p>

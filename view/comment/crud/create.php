@@ -10,22 +10,15 @@ namespace Anax\View;
 //echo showEnvironment(get_defined_vars());
 
 // Gather incoming variables and use default values if not set
-$item = isset($item) ? $item : null;
+$items = isset($items) ? $items : null;
 
 // Create urls for navigation
-$urlToView = url("question");
+$urlToViewItems = url("comment");
 
 
 
-$userHelper = new \Anax\User\UserHelper();
-
-?>
-<h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
-
-<h1>Update an item</h1>
+?><h1>Write a comment</h1>
 
 <?= $form ?>
 
-<p>
-    <a href="<?= $urlToView ?>">View all</a>
-</p>
+

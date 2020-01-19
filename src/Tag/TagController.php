@@ -55,13 +55,47 @@ class TagController implements ContainerInjectableInterface
         $tag->setDb($this->di->get("dbqb"));
 
         $page->add("tag/crud/view-all", [
-            "items" => $tag->findAll(),
+            "tags" => $tag->findAll(),
         ]);
 
         return $page->render([
             "title" => "A collection of items",
         ]);
     }
+
+            /**
+     * Show a single tag
+     *
+     * @return object as a response object
+     */
+    public function viewActionGet($tag_id) : object
+    {
+        $page = $this->di->get("page");
+        $tag = new Tag();
+        $tag->setDb($this->di->get("dbqb"));
+
+        $tagActivity = new \Anax\TagActivity\TagActivity();
+        $tagActivity->setDb($this->di->get("dbqb"));
+
+        $question = new \Anax\Question\Question();
+        $question->setDb($this->di->get("dbqb"));
+
+        $tagActicities = $tagActivity->findAllWhere("tag_id = ?", $tag_id);
+        $qids = $this->getPropData($tagActicities, "question_id");
+       
+
+        $questions = $this->getMultipleObjects($question, $qids ,"id");
+
+        $page->add("tag/crud/view-single", [
+            "tag" => $tag->findWhere("id = ?", $tag_id),
+            "questions" => $this->getMultipleObjects($question, $qids ,"id = ?")
+        ]);
+
+        return $page->render([
+            "title" => "Tag"
+        ]);
+    }
+
 
 
 
@@ -129,5 +163,31 @@ class TagController implements ContainerInjectableInterface
         return $page->render([
             "title" => "Update an item",
         ]);
+    }
+
+    /**
+     * @param Array of values to search in
+     * @param "property" to look for.
+     * 
+     * @return Array of prop-data
+     */
+
+    public function getPropData($objects, $prop){
+        $result = [];
+
+        foreach($objects as $obj){
+           $result[] = $obj->$prop;
+        }
+        return $result;
+    }
+
+    public function getMultipleObjects($dbObj, $values, $column){
+        $result = [];
+        
+        foreach($values as $value){ 
+            $result[] = $dbObj->findAllWhere("id = ?", $value);
+        }
+        
+        return $result;
     }
 }

@@ -2,7 +2,10 @@
 
 namespace Anax\View;
 
+$userHelper = new \Anax\User\UserHelper();
+
 ?>
+<h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
 
 <div class="">
     <h3>What is going on?</h3>

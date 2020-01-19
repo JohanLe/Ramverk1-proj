@@ -12,15 +12,12 @@ namespace Anax\View;
 // Gather incoming variables and use default values if not set
 $items = isset($items) ? $items : null;
 
-// Create urls for navigation
-$urlToCreate = url("question/update");
-$urlToDelete = url("question/delete");
+$userHelper = new \Anax\User\UserHelper();
 
+?>
+<h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
 
-
-?><h1>View all items</h1>
-
-<?php 
+<?php
 
 if (!$question) : ?>
     <p>There are no items to show.</p>
@@ -35,7 +32,7 @@ endif;
 
     <article class="single-view-main-content">
         <div>
-            <h4> <?= ($question->title) ?></h4>
+            <h2> <?= ($question->title) ?></h4>
         </div>
         <div class="single-view-question">
             <p> <?= ($question->text) ?></p>
@@ -44,10 +41,18 @@ endif;
         <div class="single-view-footer">
             <p class="footer-date"> <?= ($question->date) ?></h4>
             <p class="footer-author"> <?= ($question->user_id) ?></h4>
+            </br>
+            <?php if($userHelper->getUser()) : ?>
+                <div class="footer-reply">
+                    <a href="../../answer/create?qid=<?= $question->id?>">Answer</a>
+                    <a href="../../comment/create?qid=<?= $question->id?>">Comment</a>
+                </div>
+            <?php endif; ?>
         </div>
+        
     </article>
 
-    <?php foreach($question->comments as $comment): ?>
+    <?php foreach ($question->comments as $comment): ?>
         <div class="single-view-comment">
             <div lass="single-view-text">
                 <p> <?= ($comment->text) ?></p>
@@ -61,7 +66,7 @@ endif;
 
     <?php endforeach; ?>
 
-    <?php foreach($answers as $answer): ?>
+    <?php foreach ($answers as $answer): ?>
 
     
     <div class="single-view-answer">
@@ -72,9 +77,16 @@ endif;
     <div class="single-view-footer">
         <p class="footer-date"> <?= ($answer->date) ?></h4>
         <p class="footer-author"> <?= ($answer->user_id) ?></h4>
+
+        <?php if($userHelper->getUser()) : ?>
+                <div class="footer-reply">
+                    <a href="../../comment/create?qid=<?= $question->id?>&aid=<?= $answer->id?>">Comment</a>
+                </div>
+            <?php endif; ?>
     </div>
     </div>
-    <?php foreach($answer->comments as $comment): ?>
+    <?php if (property_exists($answer, "comments")): ?>
+    <?php foreach ($answer->comments as $comment): ?>
 
             <div class="single-view-comment">
                 <div lass="single-view-text">
@@ -87,7 +99,8 @@ endif;
                 </div>
             </div>
         <?php endforeach; ?>
-
+    <?php endif;?>
+    
         <?php endforeach; ?>
 
 
