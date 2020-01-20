@@ -13,6 +13,9 @@ namespace Anax\View;
 $items = isset($items) ? $items : null;
 
 $userHelper = new \Anax\User\UserHelper();
+use Michelf\Markdown;
+
+
 
 ?>
 <h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
@@ -35,12 +38,12 @@ endif;
             <h2> <?= ($question->title) ?></h4>
         </div>
         <div class="single-view-question">
-            <p> <?= ($question->text) ?></p>
+            <p> <?= Markdown::defaultTransform($question->text); ?></p>
         </div>
  
         <div class="single-view-footer">
             <p class="footer-date"> <?= ($question->date) ?></h4>
-            <p class="footer-author"> <?= ($question->user_id) ?></h4>
+            <p class="footer-author"> <?= ($question->username) ?></h4>
             </br>
             <?php if($userHelper->getUser()) : ?>
                 <div class="footer-reply">
@@ -55,7 +58,8 @@ endif;
     <?php foreach ($question->comments as $comment): ?>
         <div class="single-view-comment">
             <div lass="single-view-text">
-                <p> <?= ($comment->text) ?></p>
+ 
+                <p> <?= Markdown::defaultTransform($comment->text); ?></p>
             </div>
 
             <div class="single-view-footer">
@@ -71,12 +75,12 @@ endif;
     
     <div class="single-view-answer">
         <div>
-        <p> <?= ($answer->text) ?></p>
+        <p> <?= Markdown::defaultTransform($answer->text); ?></p>
     </div>
 
     <div class="single-view-footer">
         <p class="footer-date"> <?= ($answer->date) ?></h4>
-        <p class="footer-author"> <?= ($answer->user_id) ?></h4>
+        <p class="footer-author"> <?= ($answer->username) ?></h4>
 
         <?php if($userHelper->getUser()) : ?>
                 <div class="footer-reply">
@@ -90,12 +94,12 @@ endif;
 
             <div class="single-view-comment">
                 <div lass="single-view-text">
-                    <p> <?= ($comment->text) ?></p>
+                <p> <?= Markdown::defaultTransform($comment->text); ?></p>
                 </div>
 
                 <div class="single-view-footer">
                     <p class="footer-date"> <?= ($comment->date) ?></h4>
-                    <p class="footer-author"> <?= ($comment->user_id) ?></h4>
+                    <p class="footer-author"> <?= ($comment->username) ?></h4>
                 </div>
             </div>
         <?php endforeach; ?>

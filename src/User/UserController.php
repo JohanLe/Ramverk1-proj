@@ -158,10 +158,22 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function updateAction(int $id) : object
+    public function updateAction() : object
     {
+        $userHelper = new \Anax\User\UserHelper();
         $page = $this->di->get("page");
-        $form = new UpdateForm($this->di, $id);
+
+        if(!$userHelper->isLoggedIn()){
+
+
+            $page->add("user/crud/error", [
+                "msg" => "Login or Register",
+            ]);
+    
+            return $page->render();
+        }
+        $user = $userHelper->getUser();
+        $form = new UpdateForm($this->di, $user['id']);
         $form->check();
 
         $page->add("user/crud/update", [

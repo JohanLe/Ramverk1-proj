@@ -3,13 +3,7 @@
 namespace Anax\View;
 
 $userHelper = new \Anax\User\UserHelper();
-
-/**
- * View to create a new book.
- */
-// Show all incoming variables/functions
-//var_dump(get_defined_functions());
-//echo showEnvironment(get_defined_vars());
+use Michelf\Markdown;
 
 // Gather incoming variables and use default values if not set
 $items = isset($items) ? $items : null;
@@ -30,7 +24,8 @@ echo($userHelper->logedInAs());
             <h2> <?= ($question->title) ?></h4>
         </div>
         <div class="single-view-question">
-            <p> <?= ($question->text) ?></p>
+        
+<p> <?= Markdown::defaultTransform($question->text); ?></p>
         </div>
  
         <div class="single-view-footer">

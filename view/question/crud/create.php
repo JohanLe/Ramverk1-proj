@@ -14,10 +14,16 @@ $items = isset($items) ? $items : null;
 
 // Create urls for navigation
 $urlToViewItems = url("question");
+$userHelper = new \Anax\User\UserHelper();
 
+if(!$userHelper->isLoggedIn()){
+    echo("Logg in to create a question");
+    return false;
+};
+    
+    
 
-
-?><h1>Create a item</h1>
+?><h1>Create a Question</h1>
 
 <?= $form ?>
 

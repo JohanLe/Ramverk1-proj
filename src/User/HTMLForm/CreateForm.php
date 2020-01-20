@@ -93,14 +93,14 @@ class CreateForm extends FormModel
         $db = $this->di->get("dbqb");
         $password = password_hash($password, PASSWORD_DEFAULT);
         $userId = $this->generateRandomString();
-        var_dump($userId);
+
         $db->connect()
         ->insert("User", ["id", "email", "password", "username"])
         ->execute([$userId, $email, $password, $username]);
 
         $this->form->addOutput("User was created.");
 
-        //$user->save();
+       
         return true;
     }
 

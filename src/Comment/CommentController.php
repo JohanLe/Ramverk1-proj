@@ -77,11 +77,9 @@ class CommentController implements ContainerInjectableInterface
 
         if(isset($_GET['qid']) ){
             $qid = $_GET['qid'];
-          //  $questionData = $question->findWhere("id = ?", $qid);
             $form = new CreateForm($this->di, $qid);
             if(isset($_GET['aid']) ){
                 $aid = $_GET['aid'];
-          //      $answerData = $answer->findWhere("id = ?", $aid);
                 $form = new CreateForm($this->di, $qid, $qid);
             }
         }
@@ -97,8 +95,6 @@ class CommentController implements ContainerInjectableInterface
 
         $page->add("comment/crud/create", [
             "form" => $form->getHTML(),
-           // "question" => $questionData,
-           // "answer" => $answerData
         ]);
 
         return $page->render([

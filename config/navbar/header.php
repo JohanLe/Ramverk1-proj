@@ -9,7 +9,7 @@ return [
     // Here comes the menu items
     "items" => [
         [
-            "text" => "Hem",
+            "text" => "Home",
             "url" => "",
             "title" => "Första sidan, börja här.",
         ],
@@ -30,7 +30,7 @@ return [
         ],
         [
             "text" => "User",
-            "url" => "user",
+            "url" => "user/update",
             "title" => "User.",
             "submenu" => [
                 "items" => [
@@ -53,7 +53,7 @@ return [
             ],
         ],
         [
-            "text" => "Om fixa",
+            "text" => "About",
             "url" => "om",
             "title" => "Om denna webbplats.",
         ],

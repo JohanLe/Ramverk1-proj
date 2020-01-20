@@ -15,23 +15,31 @@ $items = isset($items) ? $items : null;
 $userHelper = new \Anax\User\UserHelper();
 
 ?>
-<h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
-<h1>View all items</h1>
+<?php if($userHelper->isLoggedIn()) : 
+    $user = $userHelper->getUser();
+    ?>
+    
+    <h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
+    <a href="./question/create"> New question</a> 
+<?php endif; ?>
+   
+    <h1>View all items</h1>
 
-<?php if (!$items) : ?>
-    <p>There are no items to show.</p>
-<?php
+<?php if (!$questions) : ?>
+    <p>There are no questions to show.</p>
+<?php 
     return;
 endif;
+
 ?>
 
 
-    <?php foreach ($items as $item) : ?>
+    <?php foreach ($questions as $question) : ?>
 
-        <a href="<?= url("question/view/{$item->id}"); ?>"><?= $item->title ?></a>
+        <a href="<?= url("question/view/{$question->id}"); ?>"><?= $question->title ?></a>
 
-        <p> Written by:<?= $item->user_id ?>  </p>
-        <p>Date: <?= $item->date ?>  </p>
+        <p> Asked by:<?= $question->username ?>  </p>
+        <p>Date: <?= $question->date ?>  </p>
         ___________________________________ </br>
     <?php endforeach; ?>
 </table>

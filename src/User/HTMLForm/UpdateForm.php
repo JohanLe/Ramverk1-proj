@@ -45,11 +45,6 @@ class UpdateForm extends FormModel
                     "validation" => ["not_empty"],
                     "value" => $user->email,
                 ],
-
-                "gravatar" => [
-                    "type" => "text",
-                    "value" => $user->gravatar,
-                ],
                 "password" => [
                     "type" => "password",
                     "validation" => ["not_empty"],

@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS User;
 
 CREATE TABLE User(
-    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "id" INTEGER PRIMARY KEY,
     "username" VARCHAR(20),
     "email" VARCHAR(255),
     "password" VARCHAR(255),
@@ -11,13 +11,11 @@ CREATE TABLE User(
 DROP TABLE IF EXISTS Question;
 
 CREATE TABLE Question(
-    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "id" INTEGER PRIMARY KEY NOT NULL,
     "title" VARCHAR(255),
+    "text" TEXT NOT NULL,
     "user_id" INT,
-    "date" DATE,
-    "likes" INT,
-    "categories" TEXT,
-    "text" TEXT NOT NULL
+    "date" DATE
 );
 
 DROP TABLE IF EXISTS Answer;
@@ -83,6 +81,11 @@ INSERT INTO ANSWER (id,question_id,user_id,date,text) VALUES(1,3,223,'2020-01-15
 */
 
 
+/**
+*
+*/
+
+
 
 /**
 *   log User activity after insert into question table.
@@ -128,14 +131,14 @@ insert into Tag (text) VALUES ("Marvels");
 insert into Tag (text) VALUES ("Superman");
 
 
-insert into Question (user_id, title, text, date, likes) VALUES (1, "Who is best?", "Superman or batman?", "2020-10-11", -5);
-insert into Question (user_id, title, text, date, likes) VALUES (2, "Who is best 2?", "Harley Quin or Joker?", "2020-09-10", 5);
-insert into Question (user_id, title, text, date, likes) VALUES (2, "Captain america strong?", "Is he?", "2020-11-10", 5);
-insert into Question (user_id, title, text, date, likes) VALUES (2,  "Who is batman?", "Mr rogers?", "2021-11-10", 5);
-insert into Question (user_id, title, text, date, likes) VALUES (2, "Where does hulk live?", "India", "2020-01-02", 5);
-insert into Question (user_id, title, text, date, likes) VALUES (3,"How old is captain america?", "I belive he is 97", "2020-01-03", 5);
-insert into Question (user_id, title, text, date, likes) VALUES (4,  "Why is marvel movies so good?", "Thor or Hulk?", "2020-02-01", 5);
-insert into Question (user_id, title, text, date, likes) VALUES (4,  "How old is Bruce Wayne?", "I belive he is 38.What do u think?", "2020-02-01", 5);
+insert into Question (user_id, title, text, date) VALUES (1, "Who is best?", "Superman or batman?", "2020-10-11");
+insert into Question (user_id, title, text, date) VALUES (2, "Who is best 2?", "Harley Quin or Joker?", "2020-09-10");
+insert into Question (user_id, title, text, date) VALUES (2, "Captain america strong?", "Is he?", "2020-11-10");
+insert into Question (user_id, title, text, date) VALUES (2,  "Who is batman?", "Mr rogers?", "2021-11-10");
+insert into Question (user_id, title, text, date) VALUES (2, "Where does hulk live?", "India", "2020-01-02");
+insert into Question (user_id, title, text, date) VALUES (3,"How old is captain america?", "I belive he is 97", "2020-01-03");
+insert into Question (user_id, title, text, date) VALUES (4,  "Why is marvel movies so good?", "Thor or Hulk?", "2020-02-01");
+insert into Question (user_id, title, text, date) VALUES (4,  "How old is Bruce Wayne?", "I belive he is 38.What do u think?", "2020-02-01");
 
 
 insert into Tag_Activity (tag_id, question_id) VALUES (1, 1);

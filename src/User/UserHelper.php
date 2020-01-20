@@ -52,7 +52,9 @@ class UserHelper {
         if($_SESSION['username'] == null){
             return "";
         }
-        return "User: " . $_SESSION['username'];
+        return 
+        "<img src='{$this->getGravatar()}'>".
+        "</br>User: " . $_SESSION['username'];
     }
 
     public function isLoggedIn(){
@@ -61,5 +63,18 @@ class UserHelper {
             return true;
         }
         return false;
+    }
+
+    public function getGravatar($s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array() ) {
+        $url = 'https://www.gravatar.com/avatar/';
+        $url .= md5( strtolower( trim( $_SESSION['user_email'] ) ) );
+        $url .= "?s=$s&d=$d&r=$r";
+        if ( $img ) {
+            $url = '<img src="' . $url . '"';
+            foreach ( $atts as $key => $val )
+                $url .= ' ' . $key . '="' . $val . '"';
+            $url .= ' />';
+        }
+        return $url;
     }
 }

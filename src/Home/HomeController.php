@@ -24,7 +24,7 @@ class HomeController implements ContainerInjectableInterface
         $user->setDb($this->di->get("dbqb"));
 
         $page->add("home/index", [
-            "questions" => $question->orderByWithLimit("date desc", 4),
+            "questions" => $question->orderByWithLimit("date desc", 5),
             "tags" => $tagActivity->mostFrequentTag(3),
             "users" => $user->mostActiveUsers(3)
         ]);
