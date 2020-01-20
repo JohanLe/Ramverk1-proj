@@ -1,22 +1,21 @@
 <?php
 
-namespace Anax\Forum;
+namespace Anax\About;
 
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 
 
-class HeroController implements ContainerInjectableInterface
+class AboutController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
 
     public function indexAction() : object
     {
-        
         $page = $this->di->get("page");
-
-        $page->add("anax/forum/index");
+ 
+        $page->add("about/index");
 
         return $page->render();
     }

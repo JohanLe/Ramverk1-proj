@@ -6,7 +6,7 @@ return [
     "routes" => [
         [
             "info" => "Home Controller.",
-            "mount" => "",
+            "mount" => "/",
             "handler" => "\Anax\Home\HomeController",
         ],
     ]

@@ -53,7 +53,7 @@ class UserHelper {
             return "";
         }
         return 
-        "<img src='{$this->getGravatar()}'>".
+        "<img src='{$this->getGravatar()}' caption='gravatar'>".
         "</br>User: " . $_SESSION['username'];
     }
 

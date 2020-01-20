@@ -2,6 +2,7 @@
 /**
  * Supply the basis for the navbar as an array.
  */
+$userHelper = new \Anax\User\UserHelper();
 return [
     // Use for styling the menu
     "wrapper" => null,
@@ -10,8 +11,8 @@ return [
     "items" => [
         [
             "text" => "Home",
-            "url" => "",
-            "title" => "Första sidan, börja här.",
+            "url" => "./",
+            "title" => "Home",
         ],
         [
             "text" => "Questions",
@@ -54,7 +55,7 @@ return [
         ],
         [
             "text" => "About",
-            "url" => "om",
+            "url" => "about",
             "title" => "Om denna webbplats.",
         ],
         
