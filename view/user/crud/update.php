@@ -17,6 +17,4 @@ $urlToView = url("user");
 
 
 
-?>
-
-<?= $form ?>
+echo($form);
