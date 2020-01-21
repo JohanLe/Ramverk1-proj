@@ -51,10 +51,10 @@ class UserHelper
      */
     public function logedInAs()
     {
-        if ($_SESSION['username'] == null) {
-            return "";
+        if ($_SESSION['user_email'] == null) {
+            return "nope";
         }
-        return;
+        return
         "<img src='{$this->getGravatar()}' caption='gravatar'>".
         "</br>User: " . $_SESSION['username'];
     }

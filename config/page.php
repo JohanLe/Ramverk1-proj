@@ -5,6 +5,11 @@
  * standard parts of the page, such as header, navbar, footer, stylesheets,
  * javascripts and more.
  */
+
+ use \Anax\User\UserHelper;
+ 
+ $userHelper = new UserHelper();
+
 return [
     // This layout view is the base for rendering the page, it decides on where
     // all the other views are rendered.
@@ -33,8 +38,8 @@ return [
             "template" => "anax/v2/header/site_logo",
             "data" => [
                 "class" => "large",
-                "siteLogo"      => "image/theme/leaf_256x256.png",
-                "siteLogoAlt"   => "Löv",
+                "siteLogo"      => $userHelper->logedInAs(),
+                "siteLogoAlt"   => $userHelper->logedInAs(),
             ],
         ],
         [
@@ -43,8 +48,8 @@ return [
             "data" => [
                 "homeLink"      => "",
                 "siteLogoText"  => "ramverk1",
-                "siteLogoTextIcon" => "image/theme/leaf_40x40.png",
-                "siteLogoTextIconAlt" => "Löv-bild",
+                "siteLogoTextIcon" => "Gravatar",
+                "siteLogoTextIconAlt" => "Gravatar",
             ],
         ],
         [

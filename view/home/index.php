@@ -7,7 +7,6 @@ $userHelper = new \Anax\User\UserHelper();
 
 ?>
 
-
 <div class="">
     <h3>What is going on?</h3>
     <div>

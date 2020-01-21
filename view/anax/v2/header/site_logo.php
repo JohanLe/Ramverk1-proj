@@ -11,6 +11,7 @@ namespace Anax\View;
 
 
 $userHelper = new \Anax\User\UserHelper();
+
 ?><span class="site-logo" >
-    <img src="<?= asd ?>" alt="<?= $siteLogoAlt ?>">
+    <img src="" alt="<?= $siteLogoAlt ?>">
 </span>

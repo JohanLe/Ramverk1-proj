@@ -14,7 +14,6 @@ $items = isset($items) ? $items : null;
 $userHelper = new \Anax\User\UserHelper();
 
 ?>
-
 <h1>Users</h1>
 
 <?php if (!$items) : ?>
