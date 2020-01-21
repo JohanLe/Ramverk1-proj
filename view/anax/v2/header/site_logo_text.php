@@ -11,10 +11,12 @@ namespace Anax\View;
 
 $userHelper = new \Anax\User\UserHelper();
 
-?><span class="site-logo-text" >
+?>
+<span class="site-logo-text" >
     <a href="<?= url($homeLink) ?>">
         <?php if (isset($siteLogoTextIcon)) : ?>
         <span class="site-logo-text-icon" >
+        
         </span>
         <?php endif; ?>
     </a>

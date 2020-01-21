@@ -1,0 +1,27 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "\"All about Marvels\" ============",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css-watch" : "sass --watch ./htdocs/css/main.scss ./htdocs/css/main.css",
+    "css-build" : "sass ./htdocs/css/main.scss ./htdocs/css/main.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JohanLe/Ramverk1-proj.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JohanLe/Ramverk1-proj/issues"
+  },
+  "homepage": "https://github.com/JohanLe/Ramverk1-proj#readme",
+  "dependencies": {
+    "scss": "^0.2.4"
+  }
+}

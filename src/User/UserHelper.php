@@ -51,8 +51,8 @@ class UserHelper
      */
     public function logedInAs()
     {
-        if ($_SESSION['user_email'] == null) {
-            return "nope";
+        if (!isset($_SESSION['user_email']) or $_SESSION['user_email'] == null) {
+            return null;
         }
         return
         "<img src='{$this->getGravatar()}' caption='gravatar'>".

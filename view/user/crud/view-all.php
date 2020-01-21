@@ -21,18 +21,9 @@ $userHelper = new \Anax\User\UserHelper();
     <?php return;
 endif; ?>
 
-<table>
-    <tr>
-        <th>Username</th>
-        <th>Email</th>
-        
-    </tr>
     <?php foreach ($items as $item) : ?>
-    <tr>
-        <td>
-            <a href="<?= url("user/view/{$item->id}"); ?>"><?= $item->username ?></a>
-        </td>
-        <td><?= $item->email ?></td>
-    </tr>
+
+        <p class="list-user"> <a href="<?= url("user/view/{$item->id}"); ?>"><?= $item->username ?></a> </p>
+
     <?php endforeach; ?>
 </table>
