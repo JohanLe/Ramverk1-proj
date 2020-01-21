@@ -14,31 +14,26 @@ $items = isset($items) ? $items : null;
 $userHelper = new \Anax\User\UserHelper();
 
 ?>
-<h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
+
 <h1>Users</h1>
 
 <?php if (!$items) : ?>
     <p>There are no items to show.</p>
-<?php
-    return;
-endif;
-?>
+    <?php return;
+endif; ?>
 
 <table>
     <tr>
-        <th>Id</th>
-        <th>Email</th>
         <th>Username</th>
-        <th>Gravatar</th>
+        <th>Email</th>
+        
     </tr>
     <?php foreach ($items as $item) : ?>
     <tr>
         <td>
-            <a href="<?= url("user/view/{$item->id}"); ?>"><?= $item->id ?></a>
+            <a href="<?= url("user/view/{$item->id}"); ?>"><?= $item->username ?></a>
         </td>
         <td><?= $item->email ?></td>
-        <td><?= $item->username ?></td>
-        <td><?= $item->gravatar ?? "None"?></td>
     </tr>
     <?php endforeach; ?>
 </table>

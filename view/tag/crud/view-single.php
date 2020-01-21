@@ -18,17 +18,11 @@ $items = isset($items) ? $items : null;
 
 if (!$tag) : ?>
     <p>There are no items to show.</p>
-<?php
-    
-    return;
-endif;
-?>
+    <?php return;
+endif; ?>
     <h3> <?= $tag->text ?> </h3>
     Found in:
-    <?php foreach ($questions as $question): ?>
-
+    <?php foreach ($questions as $question) : ?>
         <a href="../../question/view/<?= $question[0]->id ?>">  <h6><?= $question[0]->title ?> </h6> </a>
     <?php endforeach; ?>
-
-
 </table>

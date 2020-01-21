@@ -25,7 +25,6 @@ class Question extends ActiveRecordModel
     public $id;
     public $title;
     public $text;
-    public $user_id;
+    public $userId;
     public $date;
-    
 }

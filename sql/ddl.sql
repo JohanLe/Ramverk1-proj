@@ -14,7 +14,7 @@ CREATE TABLE Question(
     "id" INTEGER PRIMARY KEY NOT NULL,
     "title" VARCHAR(255),
     "text" TEXT NOT NULL,
-    "user_id" INT,
+    "userId" INT,
     "date" DATE
 );
 
@@ -22,8 +22,8 @@ DROP TABLE IF EXISTS Answer;
 
 CREATE TABLE Answer(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-    "question_id" INT NOT NULL,
-    "user_id" INT NOT NULL,
+    "questionId" INT NOT NULL,
+    "userId" INT NOT NULL,
     "date" DATE NOT NULL,
     "likes" INT,
     "text" TEXT NOT NULL
@@ -33,9 +33,9 @@ DROP TABLE IF EXISTS Comment;
 
 CREATE TABLE Comment(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-    "user_id" INT NOT NULL,
-    "question_id" INT NOT NULL,
-    "answer_id" INT,
+    "userId" INT NOT NULL,
+    "questionId" INT NOT NULL,
+    "answerId" INT,
     "date" DATE NOT NULL,
     "likes" INT,
     "text" TEXT NOT NULL
@@ -53,8 +53,8 @@ DROP TABLE IF EXISTS Tag_Activity;
 
 CREATE TABLE Tag_Activity(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-    "tag_id" INT NOT NULL,
-    "question_id" INT NOT NULL
+    "tagId" INT NOT NULL,
+    "questionId" INT NOT NULL
 );
 
 
@@ -65,8 +65,8 @@ DROP TABLE IF EXISTS User_Activity;
 
 CREATE TABLE User_Activity(
     "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-    "user_id" INT NOT NULL,
-    "type_id" INT NOT NULL,
+    "userId" INT NOT NULL,
+    "typeId" INT NOT NULL,
     "type" VARCHAR(50) NOT NULL
 );
 
@@ -77,7 +77,7 @@ CREATE TABLE User_Activity(
 /**
 *   Triggers
 
-INSERT INTO ANSWER (id,question_id,user_id,date,text) VALUES(1,3,223,'2020-01-15','very interesting question sir');
+INSERT INTO ANSWER (id,questionId,userId,date,text) VALUES(1,3,223,'2020-01-15','very interesting question sir');
 */
 
 
@@ -93,8 +93,8 @@ INSERT INTO ANSWER (id,question_id,user_id,date,text) VALUES(1,3,223,'2020-01-15
 
 CREATE TRIGGER Log_question_activity AFTER INSERT ON Question
 BEGIN
-    INSERT INTO User_Activity(user_id, type_id, type) 
-        VALUES (NEW.user_id, NEW.id, "question");
+    INSERT INTO User_Activity(userId, typeId, type) 
+        VALUES (NEW.userId, NEW.id, "question");
 
 END;
 
@@ -104,8 +104,8 @@ END;
 
 CREATE TRIGGER Log_answer_activity AFTER INSERT ON Answer
 BEGIN
-    INSERT INTO User_Activity(user_id, type_id, type) 
-        VALUES (NEW.user_id, NEW.id, "answer");
+    INSERT INTO User_Activity(userId, typeId, type) 
+        VALUES (NEW.userId, NEW.id, "answer");
 
 END;
 
@@ -115,8 +115,8 @@ END;
 
 CREATE TRIGGER Log_comment_activity AFTER INSERT ON Comment
 BEGIN
-    INSERT INTO User_Activity(user_id, type_id, type) 
-        VALUES (NEW.user_id, NEW.id, "comment");
+    INSERT INTO User_Activity(userId, typeId, type) 
+        VALUES (NEW.userId, NEW.id, "comment");
 
 END;
 
@@ -131,29 +131,24 @@ insert into Tag (text) VALUES ("Marvels");
 insert into Tag (text) VALUES ("Superman");
 
 
-insert into Question (user_id, title, text, date) VALUES (1, "Who is best?", "Superman or batman?", "2020-10-11");
-insert into Question (user_id, title, text, date) VALUES (2, "Who is best 2?", "Harley Quin or Joker?", "2020-09-10");
-insert into Question (user_id, title, text, date) VALUES (2, "Captain america strong?", "Is he?", "2020-11-10");
-insert into Question (user_id, title, text, date) VALUES (2,  "Who is batman?", "Mr rogers?", "2021-11-10");
-insert into Question (user_id, title, text, date) VALUES (2, "Where does hulk live?", "India", "2020-01-02");
-insert into Question (user_id, title, text, date) VALUES (3,"How old is captain america?", "I belive he is 97", "2020-01-03");
-insert into Question (user_id, title, text, date) VALUES (4,  "Why is marvel movies so good?", "Thor or Hulk?", "2020-02-01");
-insert into Question (user_id, title, text, date) VALUES (4,  "How old is Bruce Wayne?", "I belive he is 38.What do u think?", "2020-02-01");
-
-
-insert into Tag_Activity (tag_id, question_id) VALUES (1, 1);
-insert into Tag_Activity (tag_id, question_id) VALUES (2, 1);
-insert into Tag_Activity (tag_id, question_id) VALUES (2, 2);
-insert into Tag_Activity (tag_id, question_id) VALUES (2, 3);
+insert into Question (userId, title, text, date) VALUES (1, "How many Marvel characters can you name?", "Wolverie, Spider-man,Thor, Ironman, Hulk, Captain America, Deadpool ", "2020-10-11");
+insert into Question (userId, title, text, date) VALUES (2, "Who is best ?", "Harley Quin or Joker?", "2020-09-10");
+insert into Question (userId, title, text, date) VALUES (2, "Captain america strength?", "How many car can he lift??", "2020-11-10");
+insert into Question (userId, title, text, date) VALUES (2,  "Who is batman?", "Mr rogers?", "2021-11-10");
+insert into Question (userId, title, text, date) VALUES (4,  "Why is marvel movies so good?", "Thor or Hulk?", "2020-02-01");
 
 
 
-INSERT INTO Answer (question_id,user_id,date,text) VALUES(1,1,'2020-01-15','Captain america is very storong');
-INSERT INTO Answer (question_id,user_id,date,text) VALUES(2,2,'2020-01-15','Captain america is very storong');
-INSERT INTO Answer (question_id,user_id,date,text) VALUES(1,3,'2020-01-15','Hulk is better');
-INSERT INTO Answer (question_id,user_id,date,text) VALUES(1,4,'2020-01-15','Iron man way better then CA');
+insert into Tag_Activity (tagId, questionId) VALUES (1, 1);
+insert into Tag_Activity (tagId, questionId) VALUES (2, 1);
+insert into Tag_Activity (tagId, questionId) VALUES (2, 2);
+insert into Tag_Activity (tagId, questionId) VALUES (2, 3);
 
-INSERT INTO Comment (user_id, question_id, answer_id,date,text) VALUES(3,1,0,'2020-01-15','AWEFUL COMMENT sir');
-INSERT INTO Comment (user_id, question_id, answer_id,date,text) VALUES(3,1,0,'2020-01-17','very interesting COMMENT sir');
-INSERT INTO Comment (user_id, question_id, answer_id,date,text) VALUES(3,1,1,'2020-01-1','COMMENT sir');
-INSERT INTO Comment (user_id, question_id, answer_id,date,text) VALUES(3,1,1,'2020-01-21','COMMENT TO an ANSWER');
+
+
+INSERT INTO Answer (questionId,userId,date,text) VALUES(1,1,'2020-01-15','Silver Surfer, Gambit, Cyclops, Nick Fury');
+INSERT INTO Answer (questionId,userId,date,text) VALUES(2,2,'2020-01-15','Captain america is very storong');
+INSERT INTO Answer (questionId,userId,date,text) VALUES(1,3,'2020-01-15','Hulk is best');
+INSERT INTO Answer (questionId,userId,date,text) VALUES(1,4,'2020-01-15','Well done. Nightcrawler, Ducky Barnes');
+
+INSERT INTO Comment (userId, questionId, answerId,date,text) VALUES(3,1,0,'2020-01-15','Is ant-man from marvels?');

@@ -18,10 +18,8 @@ $items = isset($items) ? $items : null;
 
 <?php if (!$questions) : ?>
     <p>There are no items to show.</p>
-<?php
-    return;
-endif;
-?>
+    <?php return;
+endif; ?>
 
 <div class="ud-questions-container">
     <h2> Questions asked: </h2>
@@ -40,7 +38,7 @@ endif;
     <h2> Questions answered: </h2>
     <?php foreach ($answers as $answer) : ?>
         <div class="ud-question">
-            <a href="../../question/view/<?=$answer->question_id?>"> <h4> <?= $answer->text?> </h4></a>
+            <a href="../../question/view/<?=$answer->questionId?>"> <h4> <?= $answer->text?> </h4></a>
             <p> <?= $answer->date?> </p>
         </div>
 

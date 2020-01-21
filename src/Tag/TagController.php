@@ -68,7 +68,7 @@ class TagController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function viewActionGet($tag_id) : object
+    public function viewActionGet($tagId) : object
     {
         $page = $this->di->get("page");
         $tag = new Tag();
@@ -80,15 +80,15 @@ class TagController implements ContainerInjectableInterface
         $question = new \Anax\Question\Question();
         $question->setDb($this->di->get("dbqb"));
 
-        $tagActicities = $tagActivity->findAllWhere("tag_id = ?", $tag_id);
-        $qids = $this->getPropData($tagActicities, "question_id");
+        $tagActicities = $tagActivity->findAllWhere("tagId = ?", $tagId);
+        $qids = $this->getPropData($tagActicities, "questionId");
        
 
-        $questions = $this->getMultipleObjects($question, $qids ,"id");
+        $questions = $this->getMultipleObjects($question, $qids, "id");
 
         $page->add("tag/crud/view-single", [
-            "tag" => $tag->findWhere("id = ?", $tag_id),
-            "questions" => $this->getMultipleObjects($question, $qids ,"id = ?")
+            "tag" => $tag->findWhere("id = ?", $tagId),
+            "questions" => $questions
         ]);
 
         return $page->render([
@@ -168,26 +168,26 @@ class TagController implements ContainerInjectableInterface
     /**
      * @param Array of values to search in
      * @param "property" to look for.
-     * 
      * @return Array of prop-data
      */
 
-    public function getPropData($objects, $prop){
+    public function getPropData($objects, $prop)
+    {
         $result = [];
 
-        foreach($objects as $obj){
-           $result[] = $obj->$prop;
+        foreach ($objects as $obj) {
+            $result[] = $obj->$prop;
         }
         return $result;
     }
 
-    public function getMultipleObjects($dbObj, $values, $column){
+    public function getMultipleObjects($dbObj, $values)
+    {
         $result = [];
-        
-        foreach($values as $value){ 
+    
+        foreach ($values as $value) {
             $result[] = $dbObj->findAllWhere("id = ?", $value);
         }
-        
         return $result;
     }
 }

@@ -5,7 +5,6 @@ namespace Anax\Home;
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 
-
 class HomeController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
@@ -32,8 +31,8 @@ class HomeController implements ContainerInjectableInterface
         
 
             
-        return $page->render();
+        return $page->render([
+            "title" => "Stuff about Marvels"
+        ]);
     }
-
-
 }

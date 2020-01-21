@@ -73,7 +73,6 @@ class UpdateForm extends FormModel
      * Get details on item to load form with.
      *
      * @param integer $id get details on item with id.
-     * 
      * @return User
      */
     public function getItemDetails($id) : object
@@ -103,10 +102,9 @@ class UpdateForm extends FormModel
         $user->password = $this->form->value("password");
         $passwordAgain = $this->form->value("passwordAgain");
 
-        if($passwordAgain === ""){
+        if ($passwordAgain === "") {
             $passwordAgain = $user->password;
-        }
-        else if ($password !== $passwordAgain ) {
+        } else if ($user->password !== $passwordAgain) {
             $this->form->rememberValues();
             $this->form->addOutput("Password did not match.");
             return false;

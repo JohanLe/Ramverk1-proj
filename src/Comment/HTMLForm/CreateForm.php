@@ -19,7 +19,7 @@ class CreateForm extends FormModel
     public function __construct(ContainerInterface $di, $qid = 0, $aid = 0)
     {
         parent::__construct($di);
-        if($aid > 0){
+        if ($aid > 0) {
             $this->form->create(
                 [
                     "id" => __CLASS__,
@@ -51,8 +51,7 @@ class CreateForm extends FormModel
                     ],
                 ]
             );
-        }
-        else {
+        } else {
             $this->form->create(
                 [
                     "id" => __CLASS__,
@@ -64,12 +63,11 @@ class CreateForm extends FormModel
                         "value" => $qid,
                         "readonly" => true,
                         "validation" => ["not_empty"],
-                    ],      
+                    ],
                     "Comment" => [
                         "type" => "textarea",
                         "validation" => ["not_empty"],
                     ],
-    
                     "submit" => [
                         "type" => "submit",
                         "value" => "Create item",
@@ -78,10 +76,7 @@ class CreateForm extends FormModel
                 ]
             );
         }
-
     }
-
-
 
     /**
      * Callback for submit-button which should return true if it could
@@ -91,22 +86,19 @@ class CreateForm extends FormModel
      */
     public function callbackSubmit() : bool
     {
-
         $userHelper = new \Anax\User\UserHelper();
 
-        if(!$userHelper->isLoggedIn()){
+        if (!$userHelper->isLoggedIn()) {
             return false;
         }
 
         $user = $userHelper->getUser();
-        $answer_id;
-
         $comment = new Comment();
         $comment->setDb($this->di->get("dbqb"));
         
-        $comment->user_id = 22222;
-        $comment->question_id  = $this->form->value("question-id");
-        $comment->answer_id = $this->form->value("answer-id") ?? 00;
+        $comment->userId = $user['id'];
+        $comment->questionId  = $this->form->value("question-id");
+        $comment->answerId = $this->form->value("answer-id") ?? 00;
         $comment->date = date("Y-m-d H:i");
         $comment->text = $this->form->value("Comment");
         $comment->save();
@@ -122,7 +114,7 @@ class CreateForm extends FormModel
      */
     public function callbackSuccess()
     {
-        $this->di->get("response")->redirect("comment")->send();
+        $this->di->get("response")->redirect("question")->send();
     }
 
 

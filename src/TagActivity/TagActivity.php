@@ -22,6 +22,6 @@ class TagActivity extends ActiveRecordModel
      * @var integer $id primary key auto incremented.
      */
     public $id;
-    public $tag_id;
-    public $question_id;
+    public $tagId;
+    public $questionId;
 }

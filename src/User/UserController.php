@@ -60,7 +60,7 @@ class UserController implements ContainerInjectableInterface
         ]);
 
         return $page->render([
-            "title" => "A collection of items",
+            "title" => "Questions",
         ]);
     }
 
@@ -70,7 +70,7 @@ class UserController implements ContainerInjectableInterface
      *
      * @return object as a response object
      */
-    public function viewActionGet($user_id) : object
+    public function viewActionGet($userId) : object
     {
         $page = $this->di->get("page");
         $user = new User();
@@ -82,9 +82,9 @@ class UserController implements ContainerInjectableInterface
         $answer = new \Anax\Answer\Answer();
         $answer->setDb($this->di->get("dbqb"));
 
-        $userDetails = $user->findWhere("id = ?", $user_id);
-        $questions = $question->findAllWhere("user_id = ?", $user_id);
-        $answers = $answer->findAllWhere("user_id = ?", $user_id);
+        $userDetails = $user->findWhere("id = ?", $userId);
+        $questions = $question->findAllWhere("userId = ?", $userId);
+        $answers = $answer->findAllWhere("userId = ?", $userId);
 
         $page->add("user/crud/view-user-activity", [
             "user"=> $userDetails,
@@ -163,9 +163,7 @@ class UserController implements ContainerInjectableInterface
         $userHelper = new \Anax\User\UserHelper();
         $page = $this->di->get("page");
 
-        if(!$userHelper->isLoggedIn()){
-
-
+        if (!$userHelper->isLoggedIn()) {
             $page->add("user/crud/error", [
                 "msg" => "Login or Register",
             ]);
@@ -207,5 +205,4 @@ class UserController implements ContainerInjectableInterface
             "title" => "A login page",
         ]);
     }
-
 }

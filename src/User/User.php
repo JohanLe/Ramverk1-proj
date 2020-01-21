@@ -14,8 +14,6 @@ class User extends ActiveRecordModel
      */
     protected $tableName = "User";
 
-
-
     /**
      * Columns in the table.
      *
@@ -26,5 +24,4 @@ class User extends ActiveRecordModel
     public $email;
     public $password;
     public $gravatar;
-
 }

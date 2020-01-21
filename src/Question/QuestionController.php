@@ -63,20 +63,24 @@ class QuestionController implements ContainerInjectableInterface
         ]);
     }
 
-    public function viewActionGet($question_id) : object
+    public function viewActionGet($questionId) : object
     {
         $page = $this->di->get("page");
         $question = new Question();
         $answer = new \Anax\Answer\Answer();
+        //$tags = new \Anax\Tag\Tag();
+
+        $comment = new \Anax\Comment\Comment();
        
     
         $question->setDb($this->di->get("dbqb"));
         $answer->setDb($this->di->get("dbqb"));
-
-        $quest = $question->findWhereWithUserName("Question.id = ?", [$question_id]);
-        $answers = $answer->allAnswersWithUserName("question_id = ?", $question_id);
-        $comments = $question->getConnectingComments("Question.id = $question_id");
-
+        $comment->setDb($this->di->get("dbqb"));
+        
+        $quest = $question->findWhereWithUserName("Question.id = ?", [$questionId]);
+        $answers = $answer->allAnswersWithUserName("QuestionId = ?", $questionId);
+        $comments = $comment->getQuestionComments("$questionId");
+        //$tags = $tag->getTags();
         $article = $this->sortComments($quest, $answers, $comments);
 
 
@@ -165,12 +169,12 @@ class QuestionController implements ContainerInjectableInterface
     {
         $question->{"comments"} = [];
         foreach ($comments as $comment) {
-            if ($comment->answer_id != 0) {
+            if ($comment->answerId != 0) {
                 foreach ($answers as $answer) {
                     if (!property_exists($answer, "comments")) {
                         $answer->{"comments"} = [];
                     }
-                    if ($answer->id == $comment->answer_id) {
+                    if ($answer->id == $comment->answerId) {
                         $answer->comments[] = $comment;
                     }
                 }

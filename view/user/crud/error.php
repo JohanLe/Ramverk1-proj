@@ -2,5 +2,4 @@
 
 namespace Anax\View;
 
-
-Echo ("<h3>". $msg . "</h3>");
+echo ("<h3>". $msg . "</h3>");

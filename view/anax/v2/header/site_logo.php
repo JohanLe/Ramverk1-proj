@@ -10,7 +10,7 @@ namespace Anax\View;
 //echo showEnvironment(get_defined_vars(), get_defined_functions());
 
 
-
+$userHelper = new \Anax\User\UserHelper();
 ?><span class="site-logo" >
-    <img src="<?= asset($siteLogo) ?>" alt="<?= $siteLogoAlt ?>">
+    <img src="<?= asd ?>" alt="<?= $siteLogoAlt ?>">
 </span>

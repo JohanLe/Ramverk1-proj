@@ -73,17 +73,17 @@ class CreateForm extends FormModel
         $tags = $this->form->value("tags");
         $title = $this->form->value("title");
         $text  = $this->form->value("text");
-        $date = date("Y-m-d H:i");       
-        $user_id  = $user["id"];
-        $question_id = $this->generateRandomId();
+        $date = date("Y-m-d H:i");
+        $userId  = $user["id"];
+        $questionId = $this->generateRandomId();
         
 
         
         $db->connect()
-        ->insert("Question", ["id", "title", "text", "user_id", "date"])
-        ->execute([$question_id, $title, $text, $user_id, $date ]);
+        ->insert("Question", ["id", "title", "text", "userId", "date"])
+        ->execute([$questionId, $title, $text, $userId, $date ]);
         
-        $this->insertTags($db, $tags, $question_id);
+        $this->insertTags($db, $tags, $questionId);
 
         $this->form->addOutput("Question was created.");
        
@@ -91,42 +91,36 @@ class CreateForm extends FormModel
     }
 
 
-    public function insertTags($db, $tags, $question_id){
-
+    public function insertTags($db, $tags, $questionId)
+    {
         $tag = new \Anax\Tag\Tag();
         $tag->setDb($this->di->get("dbqb"));
 
-
-        
         $tagArray = explode(" ", $tags);
 
-        foreach($tagArray as $tagText){
-
-            $tag_id = $this->generateRandomId();
+        foreach ($tagArray as $tagText) {
+            $tagId = $this->generateRandomId();
             $tagExist = $tag->findWhere("text = ?", "$tagText");
 
-            if($tagExist->id == null){
-             
+            if ($tagExist->id == null) {
                 $db->connect()
                 ->insert("tag", ["id", "text"])
-                ->execute([$tag_id, $tagText]);
+                ->execute([$tagId, $tagText]);
 
                 $db->connect()
-                ->insert("Tag_Activity", ["tag_id", "question_id"])
-                ->execute([$tag_id, $question_id]);
-
-            } else{
+                ->insert("Tag_Activity", ["tagId", "questionId"])
+                ->execute([$tagId, $questionId]);
+            } else {
                 $db->connect()
-                ->insert("Tag_Activity", ["tag_id", "question_id"])
-                ->execute([$tagExist->id, $question_id]);
+                ->insert("Tag_Activity", ["tagId", "questionId"])
+                ->execute([$tagExist->id, $questionId]);
             }
-
-            
         }
     }
 
-    public function generateRandomId($length = 10) {
-        return substr(str_shuffle(str_repeat($x='0123456789', ceil($length/strlen($x)) )),1,$length);
+    public function generateRandomId($length = 10)
+    {
+        return substr(str_shuffle(str_repeat($x='0123456789', ceil($length/strlen($x)))), 1, $length);
     }
     /**
      * Callback what to do if the form was successfully submitted, this

@@ -22,8 +22,8 @@ class Answer extends ActiveRecordModel
      * @var integer $id primary key auto incremented.
      */
     public $id;
-    public $question_id;
-    public $user_id;
+    public $questionId;
+    public $userId;
     public $date;
     public $likes;
     public $text;

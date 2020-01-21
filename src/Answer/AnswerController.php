@@ -78,16 +78,14 @@ class AnswerController implements ContainerInjectableInterface
         $question = new \Anax\Question\Question();
         $question->setDb($this->di->get("dbqb"));
 
-        if(isset($_GET['qid']) ){
+        if (isset($_GET['qid'])) {
             $qid = $_GET['qid'];
             $questionData = $question->findWhere("id = ?", $qid);
             $form = new CreateForm($this->di, $qid);
-        }
-        else{
+        } else {
             $form = new CreateForm($this->di, null);
         }
 
-       
         $form->check();
         $page->add("answer/crud/create", [
             "form" => $form->getHTML(),

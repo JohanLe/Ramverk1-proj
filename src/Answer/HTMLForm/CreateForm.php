@@ -6,7 +6,6 @@ use Anax\HTMLForm\FormModel;
 use Psr\Container\ContainerInterface;
 use Anax\Answer\Answer;
 
-
 /**
  * Form to create an item.
  */
@@ -59,7 +58,7 @@ class CreateForm extends FormModel
     {
         $userHelper = new \Anax\User\UserHelper();
 
-        if(!$userHelper->isLoggedIn()){
+        if (!$userHelper->isLoggedIn()) {
             return false;
         }
 
@@ -68,8 +67,8 @@ class CreateForm extends FormModel
         $answer->setDb($this->di->get("dbqb"));
 
 
-        $answer->question_id = $this->form->value("question-id");
-        $answer->user_id = $_SESSION['user_id'];
+        $answer->questionId = $this->form->value("question-id");
+        $answer->userId = $user['id'];
         $answer->date = date("Y-m-d H:i");
         $answer->text = $this->form->value("Answer");
         $answer->save();

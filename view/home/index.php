@@ -6,14 +6,13 @@ $userHelper = new \Anax\User\UserHelper();
 
 
 ?>
-<h5 class="user-info"><?=$userHelper->logedInAs()?> </h5>
+
 
 <div class="">
     <h3>What is going on?</h3>
     <div>
         <h5> Latest Questions</h5>
-        <?php foreach ($questions as $question): ?>
-
+        <?php foreach ($questions as $question) : ?>
             <a href="<?=url("question/view/$question->id")?>"><?=$question->title?></a>
 
             Asked by: <?=$question->username?>
@@ -27,7 +26,7 @@ $userHelper = new \Anax\User\UserHelper();
     <div>
         <h5> Treding tags</h5>
 
-        <?php foreach ($tags as $tag): ?>
+        <?php foreach ($tags as $tag) : ?>
             <span>
                 <a href="<?=url("tag/view/{$tag->id}");?>"><?=$tag->text?></a>
                 - Used  <?=$tag->amount?> times.
@@ -39,8 +38,7 @@ $userHelper = new \Anax\User\UserHelper();
 
     <div>
         <h5> Most Active users<span> (Questions, answers & comments) </span> </h5>
-        <?php foreach ($users as $user): ?>
-
+        <?php foreach ($users as $user) : ?>
             <a href="<?=url("user/view/{$user->id}");?>"><?=$user->username?></a>
             Posts: <?=$user->amount?>
 

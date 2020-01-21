@@ -75,22 +75,19 @@ class CommentController implements ContainerInjectableInterface
         $qid = 0;
         $aid = 0;
 
-        if(isset($_GET['qid']) ){
+        if (isset($_GET['qid'])) {
             $qid = $_GET['qid'];
             $form = new CreateForm($this->di, $qid);
-            if(isset($_GET['aid']) ){
+            if (isset($_GET['aid'])) {
                 $aid = $_GET['aid'];
                 $form = new CreateForm($this->di, $qid, $qid);
             }
-        }
-        else{
+        } else {
             $form = new CreateForm($this->di, null);
         }
 
-
-
         $page = $this->di->get("page");
-        $form = new CreateForm($this->di,$qid,$aid);
+        $form = new CreateForm($this->di, $qid, $aid);
         $form->check();
 
         $page->add("comment/crud/create", [

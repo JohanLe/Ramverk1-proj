@@ -20,7 +20,6 @@ $urlToView = url("question");
 $userHelper = new \Anax\User\UserHelper();
 
 ?>
-<h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
 
 <h1>Update an item</h1>
 

@@ -16,7 +16,7 @@ $items = isset($items) ? $items : null;
 $urlToViewItems = url("question");
 $userHelper = new \Anax\User\UserHelper();
 
-if(!$userHelper->isLoggedIn()){
+if (!$userHelper->isLoggedIn()) {
     echo("Logg in to create a question");
     return false;
 };

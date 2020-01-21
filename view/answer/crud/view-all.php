@@ -27,10 +27,8 @@ $urlToDelete = url("answer/delete");
 
 <?php if (!$items) : ?>
     <p>There are no items to show.</p>
-<?php
-    return;
-endif;
-?>
+    <?php return;
+endif; ?>
 
 <table>
     <tr>

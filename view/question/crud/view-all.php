@@ -15,11 +15,9 @@ $items = isset($items) ? $items : null;
 $userHelper = new \Anax\User\UserHelper();
 
 ?>
-<?php if($userHelper->isLoggedIn()) : 
-    $user = $userHelper->getUser();
-    ?>
+<?php if ($userHelper->isLoggedIn()) : ?>
+    <?php $user = $userHelper->getUser(); ?>
     
-    <h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
     <a href="./question/create"> New question</a> 
 <?php endif; ?>
    
@@ -27,15 +25,9 @@ $userHelper = new \Anax\User\UserHelper();
 
 <?php if (!$questions) : ?>
     <p>There are no questions to show.</p>
-<?php 
-    return;
-endif;
-
-?>
-
-
+    <?php return;
+endif; ?>
     <?php foreach ($questions as $question) : ?>
-
         <a href="<?= url("question/view/{$question->id}"); ?>"><?= $question->title ?></a>
 
         <p> Asked by:<?= $question->username ?>  </p>

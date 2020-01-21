@@ -2,7 +2,6 @@
 
 namespace Anax\View;
 
-
 /**
  * View to display all books.
  */
@@ -16,7 +15,7 @@ $tags = isset($tags) ? $tags : null;
 $userHelper = new \Anax\User\UserHelper();
 
 ?>
-<h5 class="user-info"><?= $userHelper->logedInAs()?> </h5>
+
 
 <h1>View all Tags   <p> </p></h1>
 

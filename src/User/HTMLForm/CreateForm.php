@@ -60,8 +60,9 @@ class CreateForm extends FormModel
      * Random string generator for 12 character ids
      * @return String 12 character ids
      */
-    function generateRandomString($length = 12) {
-        return substr(str_shuffle(str_repeat($x='0123456789', ceil($length/strlen($x)) )),1,$length);
+    public function generateRandomString($length = 12)
+    {
+        return substr(str_shuffle(str_repeat($chars='0123456789', ceil($length/strlen($chars)))), 1, $length);
     }
 
     /**
@@ -73,7 +74,6 @@ class CreateForm extends FormModel
     public function callbackSubmit() : bool
     {
     
-        $id  = $this->generateRandomString();
         $email  = $this->form->value("email");
         $password = $this->form->value("password");
         $passwordAgain = $this->form->value("password-again");
@@ -83,7 +83,7 @@ class CreateForm extends FormModel
         $passwordAgain = $this->form->value("password-again");
 
         // Check password matches
-        if ($password !== $passwordAgain ) {
+        if ($password !== $passwordAgain) {
             $this->form->rememberValues();
             $this->form->addOutput("Password did not match.");
             return false;
