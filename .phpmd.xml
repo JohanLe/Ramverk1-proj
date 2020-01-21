@@ -13,6 +13,8 @@
     <exclude-pattern>vendor</exclude-pattern>
     <exclude-pattern>htdocs</exclude-pattern>
     <exclude-pattern>cache</exclude-pattern>
+    <exclude-pattern>node_modules</exclude-pattern>
+    <exclude-pattern>scss</exclude-pattern>
 
     <rule ref="rulesets/cleancode.xml">
         <exclude name="BooleanArgumentFlag" />

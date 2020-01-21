@@ -17,14 +17,10 @@ $userHelper = new \Anax\User\UserHelper();
 ?>
 
 
-<h1>View all Tags   <p> </p></h1>
+<h1>Tags </h1>
 
     <?php foreach ($tags as $tag) : ?>
-    <tr>
-        <td>
-            <a href="<?= url("tag/view/{$tag->id}"); ?>"><?= $tag->text ?></a>
-        </td>
+        <a href="<?= url("tag/view/{$tag->id}"); ?>"><?= $tag->text ?></a> | 
 
-    </tr>
     <?php endforeach; ?>
 </table>

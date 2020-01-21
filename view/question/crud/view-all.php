@@ -18,20 +18,23 @@ $userHelper = new \Anax\User\UserHelper();
 <?php if ($userHelper->isLoggedIn()) : ?>
     <?php $user = $userHelper->getUser(); ?>
     
-    <a href="./question/create"> New question</a> 
+    <h4 class="create-question-button"><a  href="./question/create"> New Question</a> </h5>
 <?php endif; ?>
    
-    <h1>View all items</h1>
+    <h1>Questions</h1>
 
 <?php if (!$questions) : ?>
     <p>There are no questions to show.</p>
     <?php return;
 endif; ?>
+<div class="questions">
     <?php foreach ($questions as $question) : ?>
-        <a href="<?= url("question/view/{$question->id}"); ?>"><?= $question->title ?></a>
+        <div class="item">
+            <a href="<?= url("question/view/{$question->id}"); ?>"><?= $question->title ?></a>
 
-        <p> Asked by:<?= $question->username ?>  </p>
-        <p>Date: <?= $question->date ?>  </p>
-        ___________________________________ </br>
+            <p> Asked by:<?= $question->username ?>  </p>
+            <p><?= $question->date ?>  </p>
+        </div>
+        
     <?php endforeach; ?>
-</table>
+</div>

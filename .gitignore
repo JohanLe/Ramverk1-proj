@@ -1,5 +1,6 @@
 /.bin
 /build
 /vendor
+/node_module
 memory::
 composer.lock

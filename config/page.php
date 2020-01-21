@@ -23,7 +23,7 @@ return [
             "htmlClass" => null,
             "lang" => "sv",
             "stylesheets" => [
-                "css/dbwebb-se.min.css",
+                "css/main.css",
             ],
             "javascripts" => [
                 "js/responsive-menu.js",

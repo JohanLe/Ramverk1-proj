@@ -71,4 +71,45 @@ body {
   text-decoration: underline;
 }
 
+.whats-new h5 {
+  border-bottom: 1px solid black;
+  width: fit-content;
+}
+.whats-new .item {
+  margin-bottom: 8px;
+}
+.whats-new .item a, .whats-new .item p {
+  margin: 0;
+  padding: 0;
+}
+.whats-new .item p {
+  font-size: 90%;
+  opacity: 0.8;
+}
+
+.create-question-button {
+  position: relative;
+  top: 10px;
+  background-color: #302f2f;
+  padding: 8px;
+  border-radius: 3px;
+  width: fit-content;
+}
+
+.questions h5 {
+  border-bottom: 1px solid black;
+  width: fit-content;
+}
+.questions .item {
+  margin-bottom: 8px;
+}
+.questions .item a, .questions .item p {
+  margin: 0;
+  padding: 0;
+}
+.questions .item p {
+  font-size: 90%;
+  opacity: 0.8;
+}
+
 /*# sourceMappingURL=main.css.map */

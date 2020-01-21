@@ -17,10 +17,6 @@ $urlToView = url("user");
 
 
 
-?><h1>Update an item</h1>
+?>
 
 <?= $form ?>
-
-<p>
-    <a href="<?= $urlToView ?>">View all</a>
-</p>

@@ -77,7 +77,7 @@ body{
      }   
     }
 }
-
+// Home
 .list-user{
     margin:0;
     margin-bottom: 5px;
@@ -85,4 +85,51 @@ body{
         text-decoration: underline;
     }
 
+}
+
+.whats-new {
+    h5 {
+        border-bottom: 1px solid black;
+        width: fit-content;
+    }
+    .item {
+        margin-bottom: 8px;
+        a,p {
+            margin: 0;
+            padding: 0;
+        }
+        p {
+            font-size: 90%;
+            opacity: 0.8;
+           }
+    }
+}
+
+
+// Question 
+.create-question-button {
+    position: relative; 
+    top:10px;
+    background-color: rgb(48, 47, 47);
+    padding: 8px;
+    border-radius: 3px;
+    width: fit-content;
+}
+
+.questions {
+    h5 {
+        border-bottom: 1px solid black;
+        width: fit-content;
+    }
+    .item {
+        margin-bottom: 8px;
+        a,p {
+            margin: 0;
+            padding: 0;
+        }
+        p {
+            font-size: 90%;
+            opacity: 0.8;
+           }
+    }
 }
